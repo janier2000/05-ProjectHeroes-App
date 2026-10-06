@@ -1,24 +1,38 @@
 import { createBrowserRouter } from "react-router";
 import { HeroePage } from "@/heroes/pages/heroe/HeroePage";
-import AdministrarPage from "@/admin/pages/AdministrarPage";
+import { HeroesLayout } from "@/heroes/layouts/HeroesLayout";
 import { BuscarPage } from "@/heroes/pages/buscar/BuscarPage";
+import { AdministrarPage } from "@/admin/pages/AdministrarPage";
 import { PrincipalPage } from "@/heroes/pages/principal/PrincipalPage";
+import { AdministradorLayout } from "@/admin/layouts/AdministradorLayout";
 
 export const RutasApp = createBrowserRouter([
   {
     path: "/",
-    element: <PrincipalPage />,
-  },
-  {
-    path: "/heroe/1",
-    element: <HeroePage />,
-  },
-  {
-    path: "/buscar",
-    element: <BuscarPage />,
+    element: <HeroesLayout />,
+    children: [
+      {
+        index: true,
+        element: <PrincipalPage />,
+      },
+      {
+        path: "heroe/1",
+        element: <HeroePage />,
+      },
+      {
+        path: "buscar",
+        element: <BuscarPage />,
+      },
+    ],
   },
   {
     path: "/administrador",
-    element: <AdministrarPage />,
+    element: <AdministradorLayout />,
+    children: [
+      {
+        index: true,
+        element: <AdministrarPage />,
+      },
+    ],
   },
 ]);

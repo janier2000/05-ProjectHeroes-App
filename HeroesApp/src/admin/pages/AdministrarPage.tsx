@@ -1,6 +1,6 @@
 import { Button } from "../../components/ui/button";
 
-export default function AdministrarPage() {
+export function AdministrarPage() {
   return (
     <div>
       <h1>Administrar</h1>
