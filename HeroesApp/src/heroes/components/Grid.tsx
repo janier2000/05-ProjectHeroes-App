@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Heart, Zap, Eye, Brain, Gauge, Shield } from "lucide-react";
+import { GridCard } from "./GridCard";
 
 export function Grid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+      <GridCard></GridCard>
       {/* Hero Card 1 - Superman */}
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+      {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
         <div className="relative h-64 overflow-hidden">
           <img
             src="/placeholder.svg?height=300&width=300"
@@ -16,7 +18,6 @@ export function Grid() {
             className="object-cover transition-all duration-500 group-hover:scale-110"
           />
 
-          {/* Status indicator */}
           <div className="absolute top-3 left-3 flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-green-500" />
             <Badge
@@ -27,12 +28,12 @@ export function Grid() {
             </Badge>
           </div>
 
-          {/* Universe badge */}
+          
           <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">
             DC
           </Badge>
 
-          {/* Favorite button */}
+         
           <Button
             size="sm"
             variant="ghost"
@@ -41,7 +42,7 @@ export function Grid() {
             <Heart className="h-4 w-4 fill-red-500 text-red-500" />
           </Button>
 
-          {/* View details button */}
+        
           <Button
             size="sm"
             variant="ghost"
@@ -72,7 +73,7 @@ export function Grid() {
             all humanity.
           </p>
 
-          {/* Stats */}
+         
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1">
               <div className="flex items-center gap-1">
@@ -104,7 +105,7 @@ export function Grid() {
             </div>
           </div>
 
-          {/* Powers */}
+         
           <div className="space-y-2">
             <h4 className="font-medium text-sm">Powers:</h4>
             <div className="flex flex-wrap gap-1">
@@ -124,10 +125,10 @@ export function Grid() {
             First appeared: 1938
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Hero Card 2 - Batman */}
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+      {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
         <div className="relative h-64 overflow-hidden">
           <img
             src="/placeholder.svg?height=300&width=300"
@@ -237,10 +238,10 @@ export function Grid() {
             First appeared: 1939
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Hero Card 3 - Wonder Woman */}
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+      {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
         <div className="relative h-64 overflow-hidden">
           <img
             src="/placeholder.svg?height=300&width=300"
@@ -350,10 +351,10 @@ export function Grid() {
             First appeared: 1941
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Hero Card 4 - Spider-Man */}
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+      {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
         <div className="relative h-64 overflow-hidden">
           <img
             src="/placeholder.svg?height=300&width=300"
@@ -463,10 +464,10 @@ export function Grid() {
             First appeared: 1962
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Hero Card 5 - Iron Man */}
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+      {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
         <div className="relative h-64 overflow-hidden">
           <img
             src="/placeholder.svg?height=300&width=300"
@@ -576,10 +577,10 @@ export function Grid() {
             First appeared: 1963
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Hero Card 6 - Deadpool */}
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+      {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
         <div className="relative h-64 overflow-hidden">
           <img
             src="/placeholder.svg?height=300&width=300"
@@ -689,7 +690,7 @@ export function Grid() {
             First appeared: 1991
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }
