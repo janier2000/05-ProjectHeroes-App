@@ -1,14 +1,17 @@
 import { Header } from "@/components/personalizado/Header";
 import { Dashboard } from "@/heroes/components/Dashboard";
+import { BuscarControles } from "./ui/BuscarControles";
 
 export function BuscarPage() {
   return (
     <>
       <Header
         titulo="Superhero Universe"
-        descripcion="Discover, explore, and manage your favorite superheroes and villains"
+        descripcion="Descubre, explora y gestiona tus superhéroes y villanos favoritos."
       ></Header>
       <Dashboard />
+      {/* filtrar y buscar */}
+      <BuscarControles />
     </>
   );
 }
