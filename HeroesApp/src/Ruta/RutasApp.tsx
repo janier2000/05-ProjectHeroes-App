@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router";
 import { lazy } from "react";
 import { HeroePage } from "@/heroes/pages/heroe/HeroePage";
-import { HeroesLayout } from "@/heroes/layouts/HeroesLayout";
+import { HeroeLayout } from "@/heroes/layouts/HeroeLayout";
 // import { BuscarPage } from "@/heroes/pages/buscar/BuscarPage";
 import { AdministrarPage } from "@/admin/pages/AdministrarPage";
-import { PrincipalPage } from "@/heroes/pages/principal/PrincipalPage";
+import { InicioPage } from "@/heroes/pages/inicio/InicioPage";
 import { AdministradorLayout } from "@/admin/layouts/AdministradorLayout";
 
 const BuscarPage = lazy(() => import("@/heroes/pages/buscar/BuscarPage"));
@@ -12,11 +12,11 @@ const BuscarPage = lazy(() => import("@/heroes/pages/buscar/BuscarPage"));
 export const RutasApp = createBrowserRouter([
   {
     path: "/",
-    element: <HeroesLayout />,
+    element: <HeroeLayout />,
     children: [
       {
         index: true,
-        element: <PrincipalPage />,
+        element: <InicioPage />,
       },
       {
         path: "heroe/1",
