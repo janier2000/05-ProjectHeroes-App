@@ -22,19 +22,19 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { HeroeHeader } from "@/components/personalizado/HeroeHeader";
-import { HeroeDashboard } from "@/heroes/components/HeroeDashboard";
+import { Header } from "@/components/personalizado/Header";
+import { Dashboard } from "@/heroes/components/Dashboard";
 
 export function InicioPage() {
   return (
     <>
       <>
-        <HeroeHeader
+        <Header
           titulo="Superhero Universe"
-          descripcion="Discover, explore, and manage your favorite superheroes and villains"
-        ></HeroeHeader>
+          descripcion="Descubre, explora y gestiona tus superhéroes y villanos favoritos."
+        ></Header>
 
-        <HeroeDashboard />
+        <Dashboard />
 
         {/* Controls */}
         <div className="flex flex-col lg:flex-row gap-4 mb-8">
