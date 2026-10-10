@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Header } from "@/components/personalizado/Header";
+import { Breadcrumbs } from "@/components/personalizado/Breadcrumbs";
 import { Dashboard } from "@/heroes/components/Dashboard";
 import { Grid } from "@/heroes/components/Grid";
 import { useState } from "react";
@@ -13,9 +14,10 @@ export function InicioPage() {
   return (
     <>
       <Header
-        titulo="Superhero Universe"
+        titulo="Universo Superhéroe"
         descripcion="Descubre, explora y gestiona tus superhéroes y villanos favoritos."
       ></Header>
+      <Breadcrumbs paginaActual="Super Héroes" />
 
       <Dashboard />
 
