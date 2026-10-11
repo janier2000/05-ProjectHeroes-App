@@ -14,11 +14,13 @@ export function InicioPage() {
     "todos" | "favoritos" | "heroes" | "villanos"
   >("todos");
 
-  const { data } = useQuery({
+  const { data: heroesResponse } = useQuery({
     queryKey: ["heroes"],
     queryFn: ObtenerHeroes,
     staleTime: 1000 * 60 * 5,
   });
+
+  console.log(heroesResponse);
 
   return (
     <>
@@ -54,17 +56,14 @@ export function InicioPage() {
         </TabsList>
 
         <TabsContent value="todos">
-          <Grid />
+          <Grid LstHeroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
-        <TabsContent value="favoritos">
-          <Grid />
-        </TabsContent>
-        <TabsContent value="heroes">
-          <Grid />
-        </TabsContent>
-        <TabsContent value="villanos">
-          <Grid />
-        </TabsContent>
+
+        <TabsContent value="favoritos">{/* <Grid /> */}</TabsContent>
+
+        <TabsContent value="heroes">{/* <Grid /> */}</TabsContent>
+
+        <TabsContent value="villanos">{/* <Grid /> */}</TabsContent>
       </Tabs>
 
       <Paginacion totalPagina={8} />

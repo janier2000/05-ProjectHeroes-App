@@ -4,7 +4,12 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Heart, Zap, Eye, Brain, Gauge, Shield } from "lucide-react";
 
-export function GridCard() {
+import type { Hero } from "../types/heroeInterface";
+interface Props {
+  Heroe: Hero;
+}
+
+export function GridCard({ Heroe }: Props) {
   return (
     <>
       <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">

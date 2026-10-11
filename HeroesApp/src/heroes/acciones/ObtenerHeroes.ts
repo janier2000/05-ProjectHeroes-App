@@ -1,43 +1,18 @@
 import { HeroeAPI } from "../api/HeroeAPI";
+import type { HeroeResponse } from "../types/HeroeResponse";
 
-// const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
-export async function ObtenerHeroes() {
-  debugger;
-  const { data } = await HeroeAPI().get(`/`);
-  debugger;
-  console.log(data);
-  return data;
+export async function ObtenerHeroes(): Promise<HeroeResponse> {
+  const { data } = await HeroeAPI().get<HeroeResponse>(`/`);
+  const LstHeroe = data.heroes.map((item) => ({
+    ...item,
+    image: `${BASE_URL}/images/${item.image}`,
+  }));
+
+  console.log(LstHeroe);
+  return {
+    ...data,
+    heroes: LstHeroe,
+  };
 }
-
-// export const ObtenerHeroesPagina = async (
-//   pagina: number, // 1
-//   limite: number = 6,
-//   categoria: string = "all",
-// ): Promise<HeroeResponse> => {
-//   if (isNaN(pagina)) {
-//     pagina = 1;
-//   }
-
-//   if (isNaN(limite)) {
-//     limite = 6;
-//   }
-
-//   const { data } = await HeroeAPI().get<HeroeResponse>(`/`, {
-//     params: {
-//       limit: limite,
-//       offset: (pagina - 1) * limite,
-//       category: categoria,
-//     },
-//   });
-
-//   const LstHeroes = data.heroes.map((item) => ({
-//     ...item,
-//     image: `${BASE_URL}/images/${item.image}`,
-//   }));
-
-//   return {
-//     ...data,
-//     heroes: LstHeroes,
-//   };
-// };
