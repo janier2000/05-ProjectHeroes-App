@@ -3,8 +3,10 @@ import { HeroeAPI } from "../api/HeroeAPI";
 // const BASE_URL = import.meta.env.VITE_API_URL;
 
 export async function ObtenerHeroes() {
+  debugger;
   const { data } = await HeroeAPI().get(`/`);
-
+  debugger;
+  console.log(data);
   return data;
 }
 

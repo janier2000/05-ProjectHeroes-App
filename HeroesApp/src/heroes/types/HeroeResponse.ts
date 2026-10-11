@@ -1,7 +1,7 @@
-import type { Heroe } from "./heroeInterface";
+import type { Hero } from "./heroeInterface";
 
 export interface HeroeResponse {
   total: number;
   pages: number;
-  heroes: Heroe[];
+  heroes: Hero[];
 }
