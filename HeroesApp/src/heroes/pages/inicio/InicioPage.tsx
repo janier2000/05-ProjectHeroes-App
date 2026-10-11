@@ -3,7 +3,7 @@ import { Header } from "@/components/personalizado/Header";
 import { Breadcrumbs } from "@/components/personalizado/Breadcrumbs";
 import { Dashboard } from "@/heroes/components/Dashboard";
 import { Grid } from "@/heroes/components/Grid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Paginacion } from "@/components/personalizado/Paginacion";
 import { ObtenerHeroes2 } from "@/heroes/acciones/ObtenerHeroes2";
 import { useQuery } from "@tanstack/react-query";
@@ -13,17 +13,13 @@ export function InicioPage() {
     "todos" | "favoritos" | "heroes" | "villanos"
   >("todos");
 
-  const { data } = useQuery({
+  const { data: heroes } = useQuery({
     queryKey: ["heroes"],
     queryFn: ObtenerHeroes2,
     staleTime: 1000 * 60 * 5,
   });
 
-  // useEffect(() => {
-  //   if (heroes) {
-  //     console.log(heroes);
-  //   }
-  // }, [heroes]);
+  const totalHeroes = heroes?.total ?? 0;
 
   return (
     <>
@@ -39,7 +35,7 @@ export function InicioPage() {
       <Tabs value={activaTab} onValueChange={setActivaTab} className="mb-8">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="todos" onClick={() => setActivaTab("todos")}>
-            Todos los personajes (16)
+            Todos los personajes ({totalHeroes})
           </TabsTrigger>
           <TabsTrigger
             value="favoritos"
