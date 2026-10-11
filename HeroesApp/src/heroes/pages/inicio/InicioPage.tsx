@@ -6,18 +6,25 @@ import { Grid } from "@/heroes/components/Grid";
 import { useEffect, useState } from "react";
 import { Paginacion } from "@/components/personalizado/Paginacion";
 import { ObtenerHeroes2 } from "@/heroes/acciones/ObtenerHeroes2";
+import { useQuery } from "@tanstack/react-query";
 
 export function InicioPage() {
   const [activaTab, setActivaTab] = useState<
     "todos" | "favoritos" | "heroes" | "villanos"
   >("todos");
 
-  useEffect(() => {
-    ObtenerHeroes2().then((heroes) => {
-      debugger;
-      console.log(heroes);
+  function obtenerHeroes() {
+    debugger;
+    const { data } = useQuery({
+      queryKey: ["heroes"],
+      queryFn: () => ObtenerHeroes2(),
+      staleTime: 1000 * 60 * 5, // 5 minutes
     });
-  }, []);
+  }
+
+  // useEffect(() => {
+  //   ObtenerHeroes2().then((heroes) => {});
+  // }, []);
 
   return (
     <>
