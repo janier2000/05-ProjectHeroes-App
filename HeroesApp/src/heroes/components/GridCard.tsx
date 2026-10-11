@@ -6,35 +6,43 @@ import { Heart, Zap, Eye, Brain, Gauge, Shield } from "lucide-react";
 
 import type { Hero } from "../types/heroeInterface";
 interface Props {
-  Heroe: Hero;
+  ObjHeroe: Hero;
 }
 
-export function GridCard({ Heroe }: Props) {
+export function GridCard({ ObjHeroe }: Props) {
   return (
     <>
       <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
         <div className="relative h-64 overflow-hidden">
           <img
-            src="/placeholder.svg?height=300&width=300"
-            alt="Superman"
+            src={ObjHeroe.image}
+            alt={ObjHeroe.name}
             className="object-cover transition-all duration-500 group-hover:scale-110"
           />
 
           {/* Status indicator */}
           <div className="absolute top-3 left-3 flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-500" />
+            <div
+              className={`w-3 h-3 rounded-full ${ObjHeroe.status === "Active" ? "bg-green-500" : "bg-red-500"}`}
+            />
             <Badge
               variant="secondary"
               className="text-xs bg-white/90 text-gray-700"
             >
-              Activa
+              {ObjHeroe.status === "Active" ? "Activa" : "Inactiva"}
             </Badge>
           </div>
 
           {/* Universe badge */}
-          <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">
-            DC
-          </Badge>
+          {ObjHeroe.universe === "DC" ? (
+            <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">
+              {ObjHeroe.universe}
+            </Badge>
+          ) : (
+            <Badge className="absolute top-3 right-3 text-xs bg-red-600 text-white">
+              {ObjHeroe.universe}
+            </Badge>
+          )}
 
           {/* Favorite button */}
           <Button
@@ -58,22 +66,23 @@ export function GridCard({ Heroe }: Props) {
         <CardHeader className="pb-3">
           <div className="flex justify-between items-start">
             <div className="space-y-1">
-              <h3 className="font-bold text-lg leading-tight">Superman</h3>
-              <p className="text-sm text-gray-600">Clark Kent</p>
+              <h3 className="font-bold text-lg leading-tight">
+                {ObjHeroe.alias}
+              </h3>
+              <p className="text-sm text-gray-600">{ObjHeroe.name}</p>
             </div>
             <Badge className="text-xs bg-green-100 text-green-800 border-green-200">
-              Héroe
+              {ObjHeroe.category}
             </Badge>
           </div>
           <Badge variant="outline" className="w-fit text-xs">
-            Liga Justicia
+            {ObjHeroe.team}
           </Badge>
         </CardHeader>
 
         <CardContent className="space-y-4">
           <p className="text-sm text-gray-600 line-clamp-2">
-            El Último Hijo de Krypton, protector de la Tierra y símbolo de
-            esperanza para toda la humanidad.
+            {ObjHeroe.description}
           </p>
 
           {/* Stats */}
@@ -84,7 +93,7 @@ export function GridCard({ Heroe }: Props) {
                 <span className="text-xs font-medium">Fortaleza</span>
               </div>
               <Progress
-                value={30}
+                value={ObjHeroe.strength * 10}
                 className="h-2"
                 activeColor="bg-orange-500"
               />
@@ -94,14 +103,22 @@ export function GridCard({ Heroe }: Props) {
                 <Brain className="h-3 w-3 text-blue-500" />
                 <span className="text-xs font-medium">Inteligencia</span>
               </div>
-              <Progress value={80} className="h-2" activeColor="bg-blue-500" />
+              <Progress
+                value={ObjHeroe.intelligence * 10}
+                className="h-2"
+                activeColor="bg-blue-500"
+              />
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-1">
                 <Gauge className="h-3 w-3 text-green-500" />
                 <span className="text-xs font-medium">Velocidad</span>
               </div>
-              <Progress value={70} className="h-2" activeColor="bg-green-500" />
+              <Progress
+                value={ObjHeroe.speed * 10}
+                className="h-2"
+                activeColor="bg-green-500"
+              />
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-1">
@@ -109,7 +126,7 @@ export function GridCard({ Heroe }: Props) {
                 <span className="text-xs font-medium">Durabilidad</span>
               </div>
               <Progress
-                value={100}
+                value={ObjHeroe.durability * 10}
                 className="h-2"
                 activeColor="bg-purple-500"
               />
@@ -118,22 +135,24 @@ export function GridCard({ Heroe }: Props) {
 
           {/* Powers */}
           <div className="space-y-2">
-            <h4 className="font-medium text-sm">Potestades:</h4>
+            <h4 className="font-medium text-sm">Powers:</h4>
             <div className="flex flex-wrap gap-1">
-              <Badge variant="outline" className="text-xs">
-                Super Fuerza
-              </Badge>
-              <Badge variant="outline" className="text-xs">
-                Vuelo
-              </Badge>
-              <Badge variant="outline" className="text-xs bg-gray-100">
-                +4 more
-              </Badge>
+              {ObjHeroe.powers.slice(0, 3).map((power) => (
+                <Badge variant="outline" className="text-xs" key={power}>
+                  {power}
+                </Badge>
+              ))}
+
+              {ObjHeroe.powers.length > 3 && (
+                <Badge variant="outline" className="text-xs bg-gray-100">
+                  +{ObjHeroe.powers.length - 3} más
+                </Badge>
+              )}
             </div>
           </div>
 
           <div className="text-xs text-gray-500 pt-2 border-t">
-            Primera aparición: 1938
+            Primera aparición: {ObjHeroe.firstAppearance}
           </div>
         </CardContent>
       </Card>

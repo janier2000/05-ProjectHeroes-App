@@ -9,7 +9,7 @@ export function Grid({ LstHeroes }: Props) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
       {LstHeroes.map((item) => (
-        <GridCard key={item.id} Heroe={item} />
+        <GridCard key={item.id} ObjHeroe={item} />
       ))}
       {/* Hero Card 1 - Superman */}
       {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
