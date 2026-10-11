@@ -3,13 +3,21 @@ import { Header } from "@/components/personalizado/Header";
 import { Breadcrumbs } from "@/components/personalizado/Breadcrumbs";
 import { Dashboard } from "@/heroes/components/Dashboard";
 import { Grid } from "@/heroes/components/Grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Paginacion } from "@/components/personalizado/Paginacion";
+import { ObtenerHeroes } from "@/heroes/acciones/ObtenerHeroes";
 
 export function InicioPage() {
   const [activaTab, setActivaTab] = useState<
     "todos" | "favoritos" | "heroes" | "villanos"
   >("todos");
+
+  useEffect(() => {
+    ObtenerHeroes().then((heroes) => {
+      console.log(heroes);
+    });
+    // Aquí puedes realizar acciones cuando el componente se monte o cuando cambie activaTab
+  }, []);
 
   return (
     <>
