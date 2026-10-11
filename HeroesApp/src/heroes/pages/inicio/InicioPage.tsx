@@ -5,7 +5,7 @@ import { Dashboard } from "@/heroes/components/Dashboard";
 import { Grid } from "@/heroes/components/Grid";
 import { useEffect, useState } from "react";
 import { Paginacion } from "@/components/personalizado/Paginacion";
-import { ObtenerHeroes } from "@/heroes/acciones/ObtenerHeroes";
+import { ObtenerHeroes2 } from "@/heroes/acciones/ObtenerHeroes2";
 
 export function InicioPage() {
   const [activaTab, setActivaTab] = useState<
@@ -13,7 +13,7 @@ export function InicioPage() {
   >("todos");
 
   useEffect(() => {
-    ObtenerHeroes().then((heroes) => {
+    ObtenerHeroes2().then((heroes) => {
       debugger;
       console.log(heroes);
     });
