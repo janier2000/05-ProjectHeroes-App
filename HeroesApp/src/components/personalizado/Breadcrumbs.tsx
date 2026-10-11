@@ -1,8 +1,8 @@
+import { Fragment } from "react";
 import { Link } from "react-router";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
@@ -23,22 +23,25 @@ export function Breadcrumbs({ paginaActual, breadcrumbs = [] }: Props) {
     <Breadcrumb className="my-5">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink>
-            <Link to="/">Inicio</Link>
-          </BreadcrumbLink>
+          <Link to="/" className="transition-colors hover:text-foreground">
+            Inicio
+          </Link>
         </BreadcrumbItem>
 
-        {breadcrumbs.map((crumb) => (
-          <div className="flex items-center">
+        {breadcrumbs.map((crumb, index) => (
+          <Fragment key={`${crumb.to}-${index}`}>
+            <BreadcrumbSeparator>
+              <SlashIcon />
+            </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <SlashIcon />
-              </BreadcrumbSeparator>
-              <BreadcrumbLink>
-                <Link to={crumb.to}>{crumb.label}</Link>
-              </BreadcrumbLink>
+              <Link
+                to={crumb.to}
+                className="transition-colors hover:text-foreground"
+              >
+                {crumb.label}
+              </Link>
             </BreadcrumbItem>
-          </div>
+          </Fragment>
         ))}
 
         <BreadcrumbSeparator>
@@ -46,7 +49,7 @@ export function Breadcrumbs({ paginaActual, breadcrumbs = [] }: Props) {
         </BreadcrumbSeparator>
 
         <BreadcrumbItem>
-          <BreadcrumbLink className="text-black">{paginaActual}</BreadcrumbLink>
+          <span className="text-black">{paginaActual}</span>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

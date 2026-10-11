@@ -1,5 +1,4 @@
 import { HeroeAPI } from "../api/HeroeAPI";
-import type { HeroeResponse } from "../types/HeroeResponse";
 
 // const BASE_URL = import.meta.env.VITE_API_URL;
 

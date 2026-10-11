@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Users, Heart, Zap, Trophy } from "lucide-react";
+import { Users, Zap, Trophy } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DashboardCard } from "./DashboardCard";
 
