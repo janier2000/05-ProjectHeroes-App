@@ -13,18 +13,20 @@ export function InicioPage() {
     "todos" | "favoritos" | "heroes" | "villanos"
   >("todos");
 
-  function obtenerHeroes() {
-    debugger;
-    const { data } = useQuery({
-      queryKey: ["heroes"],
-      queryFn: () => ObtenerHeroes2(),
-      staleTime: 1000 * 60 * 5, // 5 minutes
-    });
-  }
+  const { data: heroes, isLoading, error } = useQuery({
+    queryKey: ["heroes"],
+    queryFn: ObtenerHeroes2,
+    staleTime: 1000 * 60 * 5,
+  });
 
-  // useEffect(() => {
-  //   ObtenerHeroes2().then((heroes) => {});
-  // }, []);
+  useEffect(() => {
+    if (heroes) {
+      console.log(heroes);
+    }
+  }, [heroes]);
+
+  if (isLoading) return <p>Cargando héroes...</p>;
+  if (error) return <p>Error al cargar héroes</p>;
 
   return (
     <>
