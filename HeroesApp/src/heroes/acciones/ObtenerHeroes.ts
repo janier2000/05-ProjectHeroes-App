@@ -10,7 +10,7 @@ export async function ObtenerHeroes(): Promise<HeroeResponse> {
     image: `${BASE_URL}/images/${item.image}`,
   }));
 
-  console.log(LstHeroe);
+  // console.log(LstHeroe);
   return {
     ...data,
     heroes: LstHeroe,

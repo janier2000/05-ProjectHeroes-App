@@ -20,7 +20,7 @@ export function InicioPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  console.log(heroesResponse);
+  // console.log(heroesResponse);
 
   return (
     <>
