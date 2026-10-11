@@ -12,7 +12,10 @@ import { useSearchParams } from "react-router";
 
 export function InicioPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const activarTab = searchParams.get("tab") ?? "todos";
+  const pagina = searchParams.get("pagina") ?? "1";
+  const limite = searchParams.get("limite") ?? "6";
 
   const selectorTab = useMemo(
     function () {
@@ -29,8 +32,10 @@ export function InicioPage() {
   // >("todos");
 
   const { data: heroesResponse } = useQuery({
-    queryKey: ["heroes"],
-    queryFn: ObtenerHeroes,
+    queryKey: ["heroes", pagina, limite],
+    queryFn: function () {
+      return ObtenerHeroes(Number(pagina), Number(limite));
+    },
     staleTime: 1000 * 60 * 5,
   });
 
