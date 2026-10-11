@@ -17,7 +17,6 @@ export function InicioPage() {
       debugger;
       console.log(heroes);
     });
-    // Aquí puedes realizar acciones cuando el componente se monte o cuando cambie activaTab
   }, []);
 
   return (
