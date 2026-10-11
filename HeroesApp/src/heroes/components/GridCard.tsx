@@ -5,19 +5,27 @@ import { Progress } from "@/components/ui/progress";
 import { Heart, Zap, Eye, Brain, Gauge, Shield } from "lucide-react";
 
 import type { Hero } from "../types/heroeInterface";
+import { useNavigate } from "react-router";
 interface Props {
   ObjHeroe: Hero;
 }
 
 export function GridCard({ ObjHeroe }: Props) {
+  const navigate = useNavigate();
+
+  function handleClickImagen() {
+    navigate(`/heroe/${ObjHeroe.slug}`);
+  }
+
   return (
     <>
       <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
-        <div className="relative h-64 overflow-hidden">
+        <div className="relative h-64">
           <img
             src={ObjHeroe.image}
             alt={ObjHeroe.name}
-            className="object-cover transition-all duration-500 group-hover:scale-110"
+            className="object-cover transition-all duration-500 group-hover:scale-110 absolute top-[-30px] w-full h-[410px]"
+            onClick={handleClickImagen}
           />
 
           {/* Status indicator */}
@@ -63,7 +71,7 @@ export function GridCard({ ObjHeroe }: Props) {
           </Button>
         </div>
 
-        <CardHeader className="pb-3">
+        <CardHeader className="py-3 z-10 bg-gray-100/50 backdrop-blur-sm relative top-1 group-hover:top-[-10px] transition-all duration-300">
           <div className="flex justify-between items-start">
             <div className="space-y-1">
               <h3 className="font-bold text-lg leading-tight">

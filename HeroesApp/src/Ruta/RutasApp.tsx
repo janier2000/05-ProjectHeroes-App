@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { lazy } from "react";
 import { HeroePage } from "@/heroes/pages/heroe/HeroePage";
 import { HeroeLayout } from "@/heroes/layouts/HeroeLayout";
@@ -19,12 +19,17 @@ export const RutasApp = createBrowserRouter([
         element: <InicioPage />,
       },
       {
-        path: "heroe/1",
+        path: "heroe/:idSlug",
         element: <HeroePage />,
       },
       {
         path: "buscar",
         element: <BuscarPage />,
+      },
+      {
+        path: "*",
+        // element: <h1>404</h1>,
+        element: <Navigate to="/" />,
       },
     ],
   },
