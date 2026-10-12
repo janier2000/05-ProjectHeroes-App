@@ -28,9 +28,12 @@ export function InicioPage() {
     },
     [activarTab],
   );
-  // console.log(searchParams);
 
   const { data: heroesResponse } = useHeroePaginacion(+pagina, +limite);
+  const { data: ResumenResponse } = useHeroeResument();
+
+  // console.log(searchParams);
+
   // const { data: heroesResponse } = useQuery({
   //   queryKey: ["heroes", { page: pagina, limit: limite }],
   //   queryFn: function () {
@@ -38,8 +41,6 @@ export function InicioPage() {
   //   },
   //   staleTime: 1000 * 60 * 5,
   // });
-
-  const { data: ResumenResponse } = useHeroeResument();
 
   // const { data: ResumenResponse } = useQuery({
   //   queryKey: ["summary-information"],
