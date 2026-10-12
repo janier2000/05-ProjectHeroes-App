@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { useHeroeResument } from "@/heroes/hooks/useHeroeResument";
+import { useHeroePaginacion } from "@/heroes/hooks/useHeroePaginacion";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 
@@ -9,8 +9,9 @@ import { Breadcrumbs } from "@/components/personalizado/Breadcrumbs";
 import { Dashboard } from "@/heroes/components/Dashboard";
 import { Grid } from "@/heroes/components/Grid";
 import { Paginacion } from "@/components/personalizado/Paginacion";
-import { ObtenerHeroes } from "@/heroes/acciones/ObtenerHeroes";
-import { ObtenerResumen } from "@/heroes/acciones/ObtenerResumen";
+// import { ObtenerHeroes } from "@/heroes/acciones/ObtenerHeroes";
+// import { ObtenerResumen } from "@/heroes/acciones/ObtenerResumen";
+// import { useQuery } from "@tanstack/react-query";
 
 export function InicioPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,6 +19,7 @@ export function InicioPage() {
   const activarTab = searchParams.get("tab") ?? "todos";
   const pagina = searchParams.get("page") ?? "1";
   const limite = searchParams.get("limit") ?? "6";
+  // const categoria = searchParams.get('category') ?? 'all';
 
   const selectorTab = useMemo(
     function () {
@@ -28,13 +30,14 @@ export function InicioPage() {
   );
   // console.log(searchParams);
 
-  const { data: heroesResponse } = useQuery({
-    queryKey: ["heroes", { page: pagina, limit: limite }],
-    queryFn: function () {
-      return ObtenerHeroes(+pagina, +limite);
-    },
-    staleTime: 1000 * 60 * 5,
-  });
+  const { data: heroesResponse } = useHeroePaginacion(+pagina, +limite);
+  // const { data: heroesResponse } = useQuery({
+  //   queryKey: ["heroes", { page: pagina, limit: limite }],
+  //   queryFn: function () {
+  //     return ObtenerHeroes(+pagina, +limite);
+  //   },
+  //   staleTime: 1000 * 60 * 5,
+  // });
 
   const { data: ResumenResponse } = useHeroeResument();
 
