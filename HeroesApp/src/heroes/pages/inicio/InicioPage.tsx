@@ -14,8 +14,8 @@ export function InicioPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const activarTab = searchParams.get("tab") ?? "todos";
-  const page = searchParams.get("page") ?? "1";
-  const limit = searchParams.get("limit") ?? "6";
+  const pagina = searchParams.get("page") ?? "1";
+  const limite = searchParams.get("limit") ?? "6";
 
   const selectorTab = useMemo(
     function () {
@@ -28,9 +28,9 @@ export function InicioPage() {
   // console.log(searchParams);
 
   const { data: heroesResponse } = useQuery({
-    queryKey: ["heroes", { page: page, limit: limit }],
+    queryKey: ["heroes", { page: pagina, limit: limite }],
     queryFn: function () {
-      return ObtenerHeroes(+page, +limit);
+      return ObtenerHeroes(+pagina, +limite);
     },
     staleTime: 1000 * 60 * 5,
   });
