@@ -14,8 +14,8 @@ export function InicioPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const activarTab = searchParams.get("tab") ?? "todos";
-  const pagina = searchParams.get("pagina") ?? "1";
-  const limite = searchParams.get("limite") ?? "6";
+  const page = searchParams.get("page") ?? "1";
+  const limit = searchParams.get("limit") ?? "6";
 
   const selectorTab = useMemo(
     function () {
@@ -25,19 +25,19 @@ export function InicioPage() {
     [activarTab],
   );
 
-  console.log(searchParams);
+  // console.log(searchParams);
+
+  const { data: heroesResponse } = useQuery({
+    queryKey: ["heroes", { page: page, limit: limit }],
+    queryFn: function () {
+      return ObtenerHeroes(+page, +limit);
+    },
+    staleTime: 1000 * 60 * 5,
+  });
 
   // const [activaTab, setActivaTab] = useState<
   //   "todos" | "favoritos" | "heroes" | "villanos"
   // >("todos");
-
-  const { data: heroesResponse } = useQuery({
-    queryKey: ["heroes", pagina, limite],
-    queryFn: function () {
-      return ObtenerHeroes(Number(pagina), Number(limite));
-    },
-    staleTime: 1000 * 60 * 5,
-  });
 
   // console.log(heroesResponse);
 
@@ -117,7 +117,7 @@ export function InicioPage() {
         <TabsContent value="villanos">{/* <Grid /> */}</TabsContent>
       </Tabs>
 
-      <Paginacion totalPagina={8} />
+      <Paginacion totalPagina={heroesResponse?.pages ?? 0} />
     </>
   );
 }

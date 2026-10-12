@@ -13,13 +13,14 @@ export async function ObtenerHeroes(
   if (isNaN(limite)) {
     limite = 6;
   }
-
+  debugger;
   const { data } = await HeroeAPI().get<HeroeResponse>(`/`, {
     params: {
       limit: limite,
       offset: (pagina - 1) * limite,
     },
   });
+
   const LstHeroe = data.heroes.map((item) => ({
     ...item,
     image: `${BASE_URL}/images/${item.image}`,
