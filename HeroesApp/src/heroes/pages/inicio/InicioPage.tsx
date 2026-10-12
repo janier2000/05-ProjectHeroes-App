@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { useHeroeResument } from "@/heroes/hooks/useHeroeResument";
 import { useMemo } from "react";
+import { useSearchParams } from "react-router";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Header } from "@/components/personalizado/Header";
@@ -8,7 +10,7 @@ import { Dashboard } from "@/heroes/components/Dashboard";
 import { Grid } from "@/heroes/components/Grid";
 import { Paginacion } from "@/components/personalizado/Paginacion";
 import { ObtenerHeroes } from "@/heroes/acciones/ObtenerHeroes";
-import { useSearchParams } from "react-router";
+import { ObtenerResumen } from "@/heroes/acciones/ObtenerResumen";
 
 export function InicioPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,7 +26,6 @@ export function InicioPage() {
     },
     [activarTab],
   );
-
   // console.log(searchParams);
 
   const { data: heroesResponse } = useQuery({
@@ -35,10 +36,17 @@ export function InicioPage() {
     staleTime: 1000 * 60 * 5,
   });
 
+  const { data: ResumenResponse } = useHeroeResument();
+
+  // const { data: ResumenResponse } = useQuery({
+  //   queryKey: ["summary-information"],
+  //   queryFn: () => ObtenerResumen(),
+  //   staleTime: 1000 * 60 * 5, // 5 minutos
+  // });
+
   // const [activaTab, setActivaTab] = useState<
   //   "todos" | "favoritos" | "heroes" | "villanos"
   // >("todos");
-
   // console.log(heroesResponse);
 
   return (
@@ -65,7 +73,7 @@ export function InicioPage() {
               })
             }
           >
-            Todos los personajes
+            Todos los personajes ({ResumenResponse?.totalHeroes ?? 0})
           </TabsTrigger>
           <TabsTrigger
             value="favoritos"
@@ -89,7 +97,7 @@ export function InicioPage() {
               })
             }
           >
-            Heroes (12)
+            Heroes ({ResumenResponse?.heroCount ?? 0})
           </TabsTrigger>
           <TabsTrigger
             value="villanos"
@@ -102,7 +110,7 @@ export function InicioPage() {
               })
             }
           >
-            Villanos (2)
+            Villanos ({ResumenResponse?.villainCount ?? 0})
           </TabsTrigger>
         </TabsList>
 

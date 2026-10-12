@@ -2,15 +2,17 @@ import { Badge } from "@/components/ui/badge";
 import { Users, Zap, Trophy } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DashboardCard } from "./DashboardCard";
-import { useQuery } from "@tanstack/react-query";
-import { ObtenerResumen } from "../acciones/ObtenerResumen";
+import { useHeroeResument } from "../hooks/useHeroeResument";
+// import { useQuery } from "@tanstack/react-query";
+// import { ObtenerResumen } from "../acciones/ObtenerResumen";
 
 export function Dashboard() {
-  const { data: objResumen } = useQuery({
-    queryKey: ["summary-information"],
-    queryFn: () => ObtenerResumen(),
-    staleTime: 1000 * 60 * 5, // 5 minutos
-  });
+  const { data: ResumenResponse } = useHeroeResument();
+  // const { data: ResumenResponse } = useQuery({
+  //   queryKey: ["summary-information"],
+  //   queryFn: () => ObtenerResumen(),
+  //   staleTime: 1000 * 60 * 5, // 5 minutos
+  // });
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -21,14 +23,14 @@ export function Dashboard() {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
-            {objResumen?.totalHeroes ?? 0}
+            {ResumenResponse?.totalHeroes ?? 0}
           </div>
           <div className="flex gap-1 mt-2">
             <Badge variant="secondary" className="text-xs">
-              {objResumen?.heroCount ?? 0} Heroes
+              {ResumenResponse?.heroCount ?? 0} Heroes
             </Badge>
             <Badge variant="destructive" className="text-xs">
-              {objResumen?.villainCount ?? 0} Villanos
+              {ResumenResponse?.villainCount ?? 0} Villanos
             </Badge>
           </div>
         </CardContent>
@@ -51,10 +53,10 @@ export function Dashboard() {
         children={
           <>
             <div className="text-lg font-bold">
-              {objResumen?.strongestHero.alias ?? ""}
+              {ResumenResponse?.strongestHero.alias ?? ""}
             </div>
             <p className="text-xs text-muted-foreground">
-              Fortaleza: {objResumen?.strongestHero.strength ?? ""}
+              Fortaleza: {ResumenResponse?.strongestHero.strength ?? ""}
             </p>
           </>
         }
@@ -66,10 +68,10 @@ export function Dashboard() {
         children={
           <>
             <div className="text-lg font-bold">
-              {objResumen?.smartestHero.alias ?? ""}
+              {ResumenResponse?.smartestHero.alias ?? ""}
             </div>
             <p className="text-xs text-muted-foreground">
-              Inteligencia: {objResumen?.smartestHero.intelligence ?? ""}
+              Inteligencia: {ResumenResponse?.smartestHero.intelligence ?? ""}
             </p>
           </>
         }
