@@ -13,7 +13,7 @@ export async function ObtenerHeroes(
   if (isNaN(limite)) {
     limite = 6;
   }
-  debugger;
+
   const { data } = await HeroeAPI().get<HeroeResponse>(`/`, {
     params: {
       limit: limite,
