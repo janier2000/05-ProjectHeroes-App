@@ -2,6 +2,8 @@ import { useHeroeResument } from "@/heroes/hooks/useHeroeResument";
 import { useHeroePaginacion } from "@/heroes/hooks/useHeroePaginacion";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
+import { use } from "react";
+import { HeroeFavoritoContext } from "@/heroes/context/HeroeFavoritoContext";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Header } from "@/components/personalizado/Header";
@@ -15,6 +17,7 @@ import { Paginacion } from "@/components/personalizado/Paginacion";
 
 export function InicioPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { ConteoFavoritos, ListadoFavoritos } = use(HeroeFavoritoContext);
 
   const activarTab = searchParams.get("tab") ?? "todos";
   const pagina = searchParams.get("page") ?? "1";
@@ -92,7 +95,7 @@ export function InicioPage() {
               })
             }
           >
-            Favoritos (3)
+            Favoritos ({ConteoFavoritos ?? 0})
           </TabsTrigger>
           <TabsTrigger
             value="heroes"
@@ -127,7 +130,7 @@ export function InicioPage() {
         </TabsContent>
 
         <TabsContent value="favoritos">
-          {/* {<Grid LstHeroes={heroesResponse?.heroes ?? []} />} */}
+          {<Grid LstHeroes={ListadoFavoritos} />}
         </TabsContent>
 
         <TabsContent value="heroes">
@@ -139,7 +142,9 @@ export function InicioPage() {
         </TabsContent>
       </Tabs>
 
-      <Paginacion totalPagina={heroesResponse?.pages ?? 0} />
+      {selectorTab !== "favoritos" && (
+        <Paginacion totalPagina={heroesResponse?.pages ?? 0} />
+      )}
     </>
   );
 }

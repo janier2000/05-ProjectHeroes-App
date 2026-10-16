@@ -3,16 +3,25 @@ import { Users, Zap, Trophy } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DashboardCard } from "./DashboardCard";
 import { useHeroeResument } from "../hooks/useHeroeResument";
+import { use } from "react";
+import { HeroeFavoritoContext } from "../context/HeroeFavoritoContext";
 // import { useQuery } from "@tanstack/react-query";
 // import { ObtenerResumen } from "../acciones/ObtenerResumen";
 
 export function Dashboard() {
   const { data: ResumenResponse } = useHeroeResument();
+
+  const { ConteoFavoritos } = use(HeroeFavoritoContext);
+
   // const { data: ResumenResponse } = useQuery({
   //   queryKey: ["summary-information"],
   //   queryFn: () => ObtenerResumen(),
   //   staleTime: 1000 * 60 * 5, // 5 minutos
   // });
+
+  if (!ResumenResponse) {
+    return <div>cargando</div>;
+  }
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -41,8 +50,16 @@ export function Dashboard() {
         icono={<Users className="h-4 w-4 text-muted-foreground" />}
         children={
           <>
-            <div className="text-2xl font-bold text-red-600">3</div>
-            <p className="text-xs text-muted-foreground">18.8% of total</p>
+            <div className="text-2xl font-bold text-red-600">
+              {ConteoFavoritos ?? 0}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {(
+                (ConteoFavoritos / (ResumenResponse?.totalHeroes ?? 1)) *
+                100
+              ).toFixed(2)}
+              % de total
+            </p>
           </>
         }
       ></DashboardCard>

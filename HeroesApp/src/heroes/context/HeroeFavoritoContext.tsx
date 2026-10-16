@@ -4,8 +4,8 @@ import { useEffect } from "react";
 
 interface HeroeFavoritoContext {
   // estado
-  Listado: Hero[];
-  Conteo: number;
+  ListadoFavoritos: Hero[];
+  ConteoFavoritos: number;
 
   // metodo
   Esfavorito: (heroeObj: Hero) => boolean;
@@ -25,7 +25,6 @@ export function HeroeFavoritoProvider({ children }: PropsWithChildren) {
   );
 
   function mantenimiento(heroeObj: Hero) {
-    debugger;
     const ind = listado.find((h) => h.id === heroeObj.id);
     if (ind) {
       const listadoAux = listado.filter((h) => h.id !== heroeObj.id);
@@ -47,8 +46,8 @@ export function HeroeFavoritoProvider({ children }: PropsWithChildren) {
   return (
     <HeroeFavoritoContext.Provider
       value={{
-        Listado: listado,
-        Conteo: listado.length,
+        ListadoFavoritos: listado,
+        ConteoFavoritos: listado.length,
         Esfavorito: buscar,
         Mantenimiento: mantenimiento,
       }}
