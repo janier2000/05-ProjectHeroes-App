@@ -18,7 +18,7 @@ export function InicioPage() {
 
   const activarTab = searchParams.get("tab") ?? "todos";
   const pagina = searchParams.get("page") ?? "1";
-  const limite = searchParams.get("limit") ?? "6";
+  const limite = searchParams.get("limit") ?? "2";
   const categoria = searchParams.get("category") ?? "all";
 
   const selectorTab = useMemo(

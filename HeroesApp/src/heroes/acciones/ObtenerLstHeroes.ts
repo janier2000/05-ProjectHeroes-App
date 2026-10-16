@@ -5,15 +5,14 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 export async function ObtenerLstHeroes(
   pagina: number,
-  limite: number = 6,
+  limite: number = 2,
   categoria: string = "all",
 ): Promise<HeroeResponse> {
-  debugger;
   if (isNaN(pagina)) {
     pagina = 1;
   }
   if (isNaN(limite)) {
-    limite = 6;
+    limite = 2;
   }
 
   const { data } = await HeroeAPI().get<HeroeResponse>(`/`, {
