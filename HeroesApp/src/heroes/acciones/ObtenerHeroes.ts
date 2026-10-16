@@ -6,7 +6,9 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 export async function ObtenerHeroes(
   pagina: number,
   limite: number = 6,
+  categoria: string = "all",
 ): Promise<HeroeResponse> {
+  debugger;
   if (isNaN(pagina)) {
     pagina = 1;
   }
@@ -18,6 +20,7 @@ export async function ObtenerHeroes(
     params: {
       limit: limite,
       offset: (pagina - 1) * limite,
+      category: categoria,
     },
   });
 

@@ -19,7 +19,7 @@ export function InicioPage() {
   const activarTab = searchParams.get("tab") ?? "todos";
   const pagina = searchParams.get("page") ?? "1";
   const limite = searchParams.get("limit") ?? "6";
-  // const categoria = searchParams.get('category') ?? 'all';
+  const categoria = searchParams.get("category") ?? "all";
 
   const selectorTab = useMemo(
     function () {
@@ -29,7 +29,11 @@ export function InicioPage() {
     [activarTab],
   );
 
-  const { data: heroesResponse } = useHeroePaginacion(+pagina, +limite);
+  const { data: heroesResponse } = useHeroePaginacion(
+    +pagina,
+    +limite,
+    categoria,
+  );
   const { data: ResumenResponse } = useHeroeResument();
 
   // console.log(searchParams);
@@ -71,8 +75,8 @@ export function InicioPage() {
             onClick={() =>
               setSearchParams((prev) => {
                 prev.set("tab", "todos");
-                prev.set("categoria", "todos");
-                prev.set("pagina", "1");
+                prev.set("category", "all");
+                prev.set("page", "1");
                 return prev;
               })
             }
@@ -95,8 +99,8 @@ export function InicioPage() {
             onClick={() =>
               setSearchParams((prev) => {
                 prev.set("tab", "heroes");
-                prev.set("categoria", "heroes");
-                prev.set("pagina", "1");
+                prev.set("category", "hero");
+                prev.set("page", "1");
                 return prev;
               })
             }
@@ -108,8 +112,8 @@ export function InicioPage() {
             onClick={() =>
               setSearchParams((prev) => {
                 prev.set("tab", "villanos");
-                prev.set("categoria", "villanos");
-                prev.set("pagina", "1");
+                prev.set("category", "villain");
+                prev.set("page", "1");
                 return prev;
               })
             }
@@ -122,11 +126,17 @@ export function InicioPage() {
           <Grid LstHeroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
 
-        <TabsContent value="favoritos">{/* <Grid /> */}</TabsContent>
+        <TabsContent value="favoritos">
+          {/* {<Grid LstHeroes={heroesResponse?.heroes ?? []} />} */}
+        </TabsContent>
 
-        <TabsContent value="heroes">{/* <Grid /> */}</TabsContent>
+        <TabsContent value="heroes">
+          {<Grid LstHeroes={heroesResponse?.heroes ?? []} />}
+        </TabsContent>
 
-        <TabsContent value="villanos">{/* <Grid /> */}</TabsContent>
+        <TabsContent value="villanos">
+          {<Grid LstHeroes={heroesResponse?.heroes ?? []} />}
+        </TabsContent>
       </Tabs>
 
       <Paginacion totalPagina={heroesResponse?.pages ?? 0} />
