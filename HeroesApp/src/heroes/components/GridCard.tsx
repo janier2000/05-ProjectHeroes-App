@@ -1,18 +1,21 @@
+import { use } from "react";
+import { useNavigate } from "react-router";
+import { Heart, Zap, Eye, Brain, Gauge, Shield } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Heart, Zap, Eye, Brain, Gauge, Shield } from "lucide-react";
-
 import type { Hero } from "../types/heroeInterface";
-import { useNavigate } from "react-router";
+import { HeroeFavoritoContext } from "../context/HeroeFavoritoContext";
+
 interface Props {
   ObjHeroe: Hero;
 }
 
 export function GridCard({ ObjHeroe }: Props) {
   const navigate = useNavigate();
-
+  const { Esfavorito, Mantenimiento } = use(HeroeFavoritoContext);
   function handleClickImagen() {
     navigate(`/heroe/${ObjHeroe.slug}`);
   }
@@ -57,8 +60,15 @@ export function GridCard({ ObjHeroe }: Props) {
             size="sm"
             variant="ghost"
             className="absolute bottom-3 right-3 bg-white/90 hover:bg-white"
+            onClick={() => Mantenimiento(ObjHeroe)}
           >
-            <Heart className="h-4 w-4 fill-red-500 text-red-500" />
+            <Heart
+              className={`h-4 w-4 ${
+                Esfavorito(ObjHeroe)
+                  ? "fill-red-500 text-red-500"
+                  : "text-gray-500"
+              }`}
+            />
           </Button>
 
           {/* View details button */}
