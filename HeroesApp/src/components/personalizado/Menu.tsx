@@ -14,7 +14,7 @@ export function Menu() {
   }
 
   return (
-    <NavigationMenu>
+    <NavigationMenu className="bg-slate-100 py-5">
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link

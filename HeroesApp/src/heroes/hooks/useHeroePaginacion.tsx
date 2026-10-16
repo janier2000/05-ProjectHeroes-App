@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ObtenerHeroes } from "../acciones/ObtenerHeroes";
+import { ObtenerLstHeroes } from "../acciones/ObtenerLstHeroes";
 
 export function useHeroePaginacion(
   page: number,
@@ -9,7 +9,7 @@ export function useHeroePaginacion(
   return useQuery({
     queryKey: ["heroes", { page, limit, category }],
     queryFn: function () {
-      return ObtenerHeroes(page, limit, category);
+      return ObtenerLstHeroes(page, limit, category);
     },
     staleTime: 1000 * 60 * 5,
   });
