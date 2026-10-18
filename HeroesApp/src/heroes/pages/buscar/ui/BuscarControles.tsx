@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Search, Filter, SortAsc, Grid, Plus } from "lucide-react";
 import { useRef } from "react";
 import { useSearchParams } from "react-router";
+import { Slider } from "@/components/ui/slider";
 
 export function BuscarControles() {
   const inputBusquedaRef = useRef<HTMLInputElement>(null);
   const [busquedaParametros, setBusquedaParametros] = useSearchParams();
+  const FuerzaSeleccionada = Number(busquedaParametros.get("fuerza") ?? "0");
 
   function handleKeyDownInput(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
@@ -93,16 +95,17 @@ export function BuscarControles() {
           </div>
         </div>
         <div className="mt-4">
-          <label className="text-sm font-medium">Fuerza mínima: 0/10</label>
-          <div className="relative flex w-full touch-none select-none items-center mt-2">
-            <div className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
-              <div
-                className="absolute h-full bg-primary"
-                style={{ width: "0%" }}
-              />
-            </div>
-            <div className="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors" />
-          </div>
+          <label className="text-sm font-medium">
+            Fuerza mínima: {FuerzaSeleccionada}/10
+          </label>
+          <Slider
+            defaultValue={[FuerzaSeleccionada]}
+            onValueChange={(value) =>
+              setQueryParametros("fuerza", value.toString())
+            }
+            max={10}
+            step={1}
+          />
         </div>
       </div>
     </>

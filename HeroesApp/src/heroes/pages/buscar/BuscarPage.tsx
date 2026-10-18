@@ -11,12 +11,12 @@ export function BuscarPage() {
   const [searchParams] = useSearchParams();
 
   const nombre = searchParams.get("nombre") ?? undefined;
-  const fortaleza = searchParams.get("fortaleza") ?? undefined;
+  const fuerza = searchParams.get("fuerza") ?? undefined;
 
   const { data: LstHeroesResponce = [] } = useQuery({
-    queryKey: ["buscar", { nombre, fortaleza }],
+    queryKey: ["buscar", { nombre, fuerza }],
     queryFn: function () {
-      return ObtenerHeroeFiltro({ name: nombre, strength: fortaleza });
+      return ObtenerHeroeFiltro({ name: nombre, strength: fuerza });
     },
     staleTime: 1000 * 60 * 5, // 5 minutos
   });
