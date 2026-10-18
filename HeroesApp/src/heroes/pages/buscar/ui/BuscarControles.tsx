@@ -74,8 +74,7 @@ export function BuscarControles() {
       <Accordion
         {...({
           type: "single",
-          collapsible: true,
-          value: activeAccordionValue,
+          defaultValue: activeAccordionValue,
         } as any)}
       >
         <AccordionItem value="advance-filters">
