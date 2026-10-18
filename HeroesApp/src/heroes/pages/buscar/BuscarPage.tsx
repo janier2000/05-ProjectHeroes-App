@@ -2,8 +2,25 @@ import { Header } from "@/components/personalizado/Header";
 import { Dashboard } from "@/heroes/components/Dashboard";
 import { BuscarControles } from "./ui/BuscarControles";
 import { Breadcrumbs } from "@/components/personalizado/Breadcrumbs";
+import { useSearchParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { ObtenerHeroeFiltro } from "@/heroes/acciones/ObtenerHeroeFiltro";
+import { HeroeGrid } from "@/heroes/components/HeroeGrid";
 
 export function BuscarPage() {
+  const [searchParams] = useSearchParams();
+
+  const nombre = searchParams.get("nombre") ?? undefined;
+  const fortaleza = searchParams.get("fortaleza") ?? undefined;
+
+  const { data: LstHeroesResponce = [] } = useQuery({
+    queryKey: ["buscar", { nombre, fortaleza }],
+    queryFn: function () {
+      return ObtenerHeroeFiltro({ name: nombre, strength: fortaleza });
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutos
+  });
+
   return (
     <>
       <Header
@@ -24,6 +41,8 @@ export function BuscarPage() {
 
       {/* filtrar y buscar */}
       <BuscarControles />
+
+      <HeroeGrid LstHeroes={LstHeroesResponce} />
     </>
   );
 }

@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Header } from "@/components/personalizado/Header";
 import { Breadcrumbs } from "@/components/personalizado/Breadcrumbs";
 import { Dashboard } from "@/heroes/components/Dashboard";
-import { Grid } from "@/heroes/components/Grid";
+import { HeroeGrid } from "@/heroes/components/HeroeGrid";
 import { Paginacion } from "@/components/personalizado/Paginacion";
 // import { ObtenerHeroes } from "@/heroes/acciones/ObtenerHeroes";
 // import { ObtenerResumen } from "@/heroes/acciones/ObtenerResumen";
@@ -126,19 +126,19 @@ export function InicioPage() {
         </TabsList>
 
         <TabsContent value="todos">
-          <Grid LstHeroes={heroesResponse?.heroes ?? []} />
+          <HeroeGrid LstHeroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
 
         <TabsContent value="favoritos">
-          {<Grid LstHeroes={ListadoFavoritos} />}
+          {<HeroeGrid LstHeroes={ListadoFavoritos} />}
         </TabsContent>
 
         <TabsContent value="heroes">
-          {<Grid LstHeroes={heroesResponse?.heroes ?? []} />}
+          {<HeroeGrid LstHeroes={heroesResponse?.heroes ?? []} />}
         </TabsContent>
 
         <TabsContent value="villanos">
-          {<Grid LstHeroes={heroesResponse?.heroes ?? []} />}
+          {<HeroeGrid LstHeroes={heroesResponse?.heroes ?? []} />}
         </TabsContent>
       </Tabs>
 
