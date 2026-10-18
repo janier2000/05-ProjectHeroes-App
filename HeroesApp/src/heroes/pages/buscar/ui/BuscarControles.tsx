@@ -15,8 +15,8 @@ export function BuscarControles() {
   const inputBusquedaRef = useRef<HTMLInputElement>(null);
   const [busquedaParametros, setBusquedaParametros] = useSearchParams();
   const fuerzaSeleccionada = Number(busquedaParametros.get("fuerza") ?? "0");
-  const activeAccordion = busquedaParametros.get("active-accordion") ?? "";
-  const activeAccordionValue = activeAccordion ? [activeAccordion] : [];
+  const activarAcordeon = busquedaParametros.get("activar-acordeon") ?? "";
+  const activarAcordeonValue = activarAcordeon ? [activarAcordeon] : [];
 
   function handleKeyDownInput(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
@@ -30,6 +30,20 @@ export function BuscarControles() {
       prev.set(nombre, value);
       return prev;
     });
+  }
+
+  function handleClickFiltro() {
+    debugger;
+    console.log({ activarAcordeon });
+    if (activarAcordeon === "filtro-advanzado") {
+      setQueryParametros("activar-acordeon", "");
+      // setSearchParams((prev) => {
+      //   prev.delete('activar-acordeon');
+      //   return prev;
+      // });
+      return;
+    }
+    setQueryParametros("activar-acordeon", "filtro-advanzado");
   }
 
   return (
@@ -49,17 +63,23 @@ export function BuscarControles() {
 
         {/* Action buttons */}
         <div className="flex gap-2">
-          <Button variant="outline" className="h-12 bg-transparent">
+          <Button
+            variant={
+              activarAcordeon === "filtro-advanzado" ? "default" : "outline"
+            }
+            className="h-12"
+            onClick={handleClickFiltro}
+          >
             <Filter className="h-4 w-4 mr-2" />
-            Filtros
+            filtro
           </Button>
 
-          <Button variant="outline" className="h-12 bg-transparent">
+          <Button variant="outline" className="h-12 ">
             <SortAsc className="h-4 w-4 mr-2" />
             Ordenar por Nombre
           </Button>
 
-          <Button variant="outline" className="h-12 bg-transparent">
+          <Button variant="outline" className="h-12">
             <Grid className="h-4 w-4" />
           </Button>
 
@@ -74,10 +94,10 @@ export function BuscarControles() {
       <Accordion
         {...({
           type: "single",
-          defaultValue: activeAccordionValue,
+          defaultValue: activarAcordeonValue,
         } as any)}
       >
-        <AccordionItem value="advance-filters">
+        <AccordionItem value="filtro-advanzado">
           <AccordionTrigger>Filtros avanzados</AccordionTrigger>
           <AccordionContent>
             <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
