@@ -8,13 +8,15 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
+  AccordionTrigger,
 } from "@/components/ui/accordion";
 
 export function BuscarControles() {
   const inputBusquedaRef = useRef<HTMLInputElement>(null);
   const [busquedaParametros, setBusquedaParametros] = useSearchParams();
-  const FuerzaSeleccionada = Number(busquedaParametros.get("fuerza") ?? "0");
+  const fuerzaSeleccionada = Number(busquedaParametros.get("fuerza") ?? "0");
   const activeAccordion = busquedaParametros.get("active-accordion") ?? "";
+  const activeAccordionValue = activeAccordion ? [activeAccordion] : [];
 
   function handleKeyDownInput(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
@@ -69,9 +71,15 @@ export function BuscarControles() {
       </div>
 
       {/* Filtros avanzados */}
-      <Accordion type="single" collapsible value={activeAccordion}>
+      <Accordion
+        {...({
+          type: "single",
+          collapsible: true,
+          value: activeAccordionValue,
+        } as any)}
+      >
         <AccordionItem value="advance-filters">
-          {/* <AccordionTrigger>Filtros avanzados</AccordionTrigger> */}
+          <AccordionTrigger>Filtros avanzados</AccordionTrigger>
           <AccordionContent>
             <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
               <div className="flex justify-between items-center mb-4">
@@ -106,10 +114,10 @@ export function BuscarControles() {
               </div>
               <div className="mt-4">
                 <label className="text-sm font-medium">
-                  Fuerza mínima: {FuerzaSeleccionada}/10
+                  Fuerza mínima: {fuerzaSeleccionada}/10
                 </label>
                 <Slider
-                  defaultValue={[FuerzaSeleccionada]}
+                  defaultValue={[fuerzaSeleccionada]}
                   onValueChange={(value) =>
                     setQueryParametros("fuerza", value.toString())
                   }
