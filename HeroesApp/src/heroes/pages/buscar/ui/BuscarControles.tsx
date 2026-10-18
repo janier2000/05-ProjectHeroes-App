@@ -4,11 +4,17 @@ import { Search, Filter, SortAsc, Grid, Plus } from "lucide-react";
 import { useRef } from "react";
 import { useSearchParams } from "react-router";
 import { Slider } from "@/components/ui/slider";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+} from "@/components/ui/accordion";
 
 export function BuscarControles() {
   const inputBusquedaRef = useRef<HTMLInputElement>(null);
   const [busquedaParametros, setBusquedaParametros] = useSearchParams();
   const FuerzaSeleccionada = Number(busquedaParametros.get("fuerza") ?? "0");
+  const activeAccordion = busquedaParametros.get("active-accordion") ?? "";
 
   function handleKeyDownInput(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
@@ -63,51 +69,58 @@ export function BuscarControles() {
       </div>
 
       {/* Filtros avanzados */}
-      <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">Filtros avanzados</h3>
-          <Button variant="ghost">Limpiar todo</Button>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Equipo</label>
-            <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-              Todos los equipos
+      <Accordion type="single" collapsible value={activeAccordion}>
+        <AccordionItem value="advance-filters">
+          {/* <AccordionTrigger>Filtros avanzados</AccordionTrigger> */}
+          <AccordionContent>
+            <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Filtros avanzados</h3>
+                <Button variant="ghost">Limpiar todo</Button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Equipo</label>
+                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                    Todos los equipos
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Categoría</label>
+                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                    Todas las categorías
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Universo</label>
+                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                    Todos los universos
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Estado</label>
+                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                    Todos los estados
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4">
+                <label className="text-sm font-medium">
+                  Fuerza mínima: {FuerzaSeleccionada}/10
+                </label>
+                <Slider
+                  defaultValue={[FuerzaSeleccionada]}
+                  onValueChange={(value) =>
+                    setQueryParametros("fuerza", value.toString())
+                  }
+                  max={10}
+                  step={1}
+                />
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Categoría</label>
-            <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-              Todas las categorías
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Universo</label>
-            <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-              Todos los universos
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Estado</label>
-            <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-              Todos los estados
-            </div>
-          </div>
-        </div>
-        <div className="mt-4">
-          <label className="text-sm font-medium">
-            Fuerza mínima: {FuerzaSeleccionada}/10
-          </label>
-          <Slider
-            defaultValue={[FuerzaSeleccionada]}
-            onValueChange={(value) =>
-              setQueryParametros("fuerza", value.toString())
-            }
-            max={10}
-            step={1}
-          />
-        </div>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </>
   );
 }
